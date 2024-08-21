@@ -1,0 +1,29 @@
+# Node.js
+node_modules/
+package-lock.json
+yarn.lock
+*.log
+
+# Directorios de construcción y salida
+dist/
+out/
+build/
+.cache/
+.cache-loader/
+
+# Archivos temporales de IDEs y editores
+.idea/
+.vscode/
+*.swp
+*.swo
+*.swn
+
+# Entornos específicos de configuración
+.env
+.env.*.local
+
+# Otros archivos o directorios específicos de NestJS
+.nest-cli.json
+
+# Resultados de pruebas y cobertura
+coverage/
