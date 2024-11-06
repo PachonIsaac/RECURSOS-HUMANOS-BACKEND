@@ -4,12 +4,14 @@ import { AppController } from './app.controller';
 import { ContratacionModule} from './modules/contratacion/contratacion.module';
 import { DatabaseModule} from './database/database-module.module'
 import { LoggerMiddleware } from 'src/middleware/logger.middleware';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     ContratacionModule,
-    DatabaseModule
+    DatabaseModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [],

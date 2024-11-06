@@ -1,6 +1,7 @@
-import { Controller, Get, Post, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Body, HttpCode } from '@nestjs/common';
 import { ApiTags} from '@nestjs/swagger';
 import { ContratacionService} from './contratacion.service'
+import  {CreatePersonDto, IniciarSesionDto} from './dto/index'
 
 @Controller('contratacion')
 @ApiTags('Seleccion y contratacion')
@@ -18,14 +19,27 @@ export class ContratacionController {
     return
   }
 
+  @Post('iniciar-sesion')
+  @HttpCode(200)
+  async iniciarSesion(@Body() data: IniciarSesionDto){
+    
+  }
+
+  
   @Post('guardar-informacion-personal')
-  async guardarInfoPersonal(){
-    return
+  @HttpCode(201)
+  async guardarInfoPersonal(@Body() data: CreatePersonDto){
+    return await this.contraracionService.guardarInfoPersonal(data)
   }
 
   @Get('tipos-documento')
-  async getTiposCedula(){
-    return await this.contraracionService.create()
+  async getTiposDocumento(){
+    return await this.contraracionService.getTiposDocumento()
+  }
+
+  @Get('tipos-sangre')
+  async getTiposSangre(){
+    return await this.contraracionService.getTiposDocumento()
   }
 
 
