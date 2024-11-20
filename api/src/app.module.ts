@@ -5,13 +5,15 @@ import { ContratacionModule} from './modules/contratacion/contratacion.module';
 import { DatabaseModule} from './database/database-module.module'
 import { LoggerMiddleware } from 'src/middleware/logger.middleware';
 import { AuthModule } from './modules/auth/auth.module';
+import { VacantesModule } from './modules/vacantes/vacantes.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     ContratacionModule,
     DatabaseModule,
-    AuthModule
+    AuthModule,
+    VacantesModule
   ],
   controllers: [AppController],
   providers: [],

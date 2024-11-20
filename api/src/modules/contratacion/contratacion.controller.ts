@@ -1,7 +1,9 @@
-import { Controller, Get, Post, Delete, Body, HttpCode } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Body, HttpCode, UseInterceptors, UploadedFile } from '@nestjs/common';
 import { ApiTags} from '@nestjs/swagger';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { ContratacionService} from './contratacion.service'
-import  {CreatePersonDto, IniciarSesionDto} from './dto/index'
+import  {CreatePersonDto, GenerarDocumentosDto, GuadarInscripcionDto, GuardarDocumentoDto} from './dto/index'
+import 'multer'
 
 @Controller('contratacion')
 @ApiTags('Seleccion y contratacion')
@@ -9,27 +11,30 @@ export class ContratacionController {
 
   constructor(private readonly contraracionService: ContratacionService){}
 
-  @Post('guardar-candidatura')
-  async enviarCandidatura(){
-    return
-  }
-
-  @Delete('eliminar-candidatura')
-  async EliminarCandidatura(){
-    return
-  }
-
-  @Post('iniciar-sesion')
-  @HttpCode(200)
-  async iniciarSesion(@Body() data: IniciarSesionDto){
-    
-  }
-
   
   @Post('guardar-informacion-personal')
   @HttpCode(201)
   async guardarInfoPersonal(@Body() data: CreatePersonDto){
     return await this.contraracionService.guardarInfoPersonal(data)
+  }
+
+  @Post('guardar-inscripcion')
+  @HttpCode(201)
+  async guardarInscripcion(@Body() data: GuadarInscripcionDto){
+    return await this.contraracionService.guardarInscripcion(data)
+  }
+
+  @Post('generar-documentos')
+  @HttpCode(201)
+  async generarDocumentos(@Body() data: GenerarDocumentosDto){
+    return await this.contraracionService.generarDocumentos(data)
+  }
+
+  @Post('guardar-documento')
+  @HttpCode(201)
+  @UseInterceptors(FileInterceptor('file'))
+  async guardarDocumento(@Body() data: GuardarDocumentoDto, @UploadedFile() file: Express.Multer.File){
+   return await this.contraracionService.guardarDocumento(data, file)
   }
 
   @Get('tipos-documento')
@@ -42,5 +47,7 @@ export class ContratacionController {
     return await this.contraracionService.getTiposDocumento()
   }
 
+//  @Post('generar-certificado')
+  //async generarCertificado(@Body() data: ){}
 
 }
