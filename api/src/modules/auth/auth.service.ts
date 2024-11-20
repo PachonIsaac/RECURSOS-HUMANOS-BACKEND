@@ -57,7 +57,7 @@ export class AuthService {
             rol: user.rol
         };
 
-        const secretKey = process.env.JWT_SECRET_KEY || 'mi_clave_secreta';
+        const secretKey = process.env.JWT_SECRET_KEY || 'mi_clave_s ecreta';
         const token = jwt.sign(payload, secretKey, { expiresIn: '1h' });
 
         return token;

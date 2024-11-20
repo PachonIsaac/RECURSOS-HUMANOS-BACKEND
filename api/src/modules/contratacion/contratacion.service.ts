@@ -134,6 +134,20 @@ export class ContratacionService {
     }
   }
 
+  public async traerDocumentos(enrolled_id: number){
+    const client = await this.getClient();
+    try {
+      const result = await client.query(SqlContratacion.traerDocumentos, [
+        enrolled_id
+      ]);
+      return result.rows;
+    } catch (error) {
+      throw new Error('Error al traer los documentos: ' + error.message);
+    } finally {
+      client.release();
+    }
+  }
+
 
 
 }

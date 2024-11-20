@@ -99,4 +99,11 @@ export class SqlContratacion {
     WHERE id = $1
   
   `;
+
+  static readonly traerDocumentos = `
+    SELECT *
+    FROM "talentoHumano".enrolleddocs
+    WHERE enrolled_id = $1
+  
+  `;
 }

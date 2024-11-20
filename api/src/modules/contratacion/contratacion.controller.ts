@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Delete, Body, HttpCode, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Body, HttpCode, UseInterceptors, UploadedFile, Param } from '@nestjs/common';
 import { ApiTags} from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ContratacionService} from './contratacion.service'
@@ -49,5 +49,10 @@ export class ContratacionController {
 
 //  @Post('generar-certificado')
   //async generarCertificado(@Body() data: ){}
+
+  @Get('traer-documentos:enrolled_id')
+  async traerDocumentos(@Param('enrolled_id') enrolled_id: number){
+    return await this.contraracionService.traerDocumentos(enrolled_id)
+  }
 
 }
